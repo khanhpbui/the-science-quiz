@@ -1,7 +1,7 @@
 var finalScore = "";
-var secondsLeft = 100;
+var secondsLeft = 15;
 
-var viewScoreBtnEl = document.querySelector('#view-score');//button
+var viewScoreBtnEl = document.querySelector('#view-score');
 var timeEl = document.querySelector('#time-el');
 
 var startBtnEl = document.querySelector('#start-btn');
@@ -10,43 +10,127 @@ var optA = document.querySelector('#a');
 var optB = document.querySelector('#b');
 var optC = document.querySelector('#c');
 var optD = document.querySelector('#d');
+var chosenOpt = document.querySelector('.option');
 var answerEl = document.querySelector('#answer');
-var finalScore = document.querySelector('#score');
 var allDone = document.querySelector('#all-done');
+var quizScore = document.querySelector('#score');
 
+function startQuiz(){
+    startBtnEl.textContent = 'Start Quiz';
+    startBtnEl.addEventListener('click', timer);
+    };
+
+    startQuiz();
+
+
+function timer() {
+        var timerInterval = setInterval(function(){
+            secondsLeft--;
+        startBtnEl.textContent = '';
+        displayQuestion();
+            // if (answerEl === "Incorrect!") {
+            //     secondsLeft = secondsLeft - 15;
+            //     timeLeft();
+            // }
+            if(secondsLeft > 0){
+                timeLeft();
+            } else if(secondsLeft === 0) {
+                clearInterval(timerInterval);
+                sendMessage();
+            }else{
+                timeEl.textContent = '';
+            }
+        }, 1000);
+    };
 
 function timeLeft(){
     timeEl.textContent = 'Time: ' + secondsLeft +" second(s) left.";
 };
 
-function timer() {
-    var timerInterval = setInterval(function(){
-        secondsLeft--;
-        timeLeft();
-        // if (answerEl === "Incorrect!") {
-        //     secondsLeft = secondsLeft - 15;
-        //     timeLeft();
-        // }
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
-            sendMessage();
-        }
-    }, 1000);
-};
-
-startBtnEl.addEventListener('click', timer)
-
 function sendMessage() {
     timeEl.textContent = '';
     allDone.textContent = 'ALL DONE!!!';
+    var questContainer = document.querySelector('#question-container');
+    questContainer.setAttribute('style', 'display: none');
+    var scoreContainer = document.querySelector('#score-container');
+    scoreContainer.setAttribute('style', 'display: block');
     //add textContent with finalScore later. each correct answer is 20%
     //add form to input initials.createElement form
-}
+};
 
+function displayQuestion(){
+    // create questions
+    var questions = [
+        {question: 'JavaScript File Has An Extension of:',
+        optionA: 'A. .java',
+        optionB: 'B. .js',
+        optionC: 'C. javascript',
+        optionD: 'D. .xml',
+        correctAns: 'B. .js'
+        },
+        {question: 'Inside which HTML element do we put the JavaScript?',
+        optionA: 'A. <js>',
+        optionB: 'B. <javascript>',
+        optionC: 'C. <script>',
+        optionD: 'D. <scripting>',
+        correctAns: 'C. <script>'
+        },
+        {question: 'Which Of The Dialog Box Display a Message And a Data Entry Field?',
+        optionA: 'A. Alert()',
+        optionB: 'B. Prompt()',
+        optionC: 'C. Confirm()',
+        optionD: 'D. Msg()',
+        correctAns: 'B. Prompt()'
+        },
+        {question: 'How do you write "Hello World" in an alert box?',
+        optionA: 'A. msg("Hello World")',
+        optionB: 'B. msgBox("Hello World")',
+        optionC: 'C. alert("Hello World")',
+        optionD: 'D. alertBox("Hello World")',
+        correctAns: 'C. alert("Hello World")'
+        },
+        {question: 'How do you call a function named "myFunction"?',
+        optionA: 'A. call myFunction()',
+        optionB: 'B. call function myFunction()',
+        optionC: 'C. myFunction',
+        optionD: 'D. myFunction()',
+        correctAns: 'D. myFunction()'
+        },
+    ];
+    ;
+    for (i = 0 ; i < questions.length ; i++){
+        questionEl.textContent = questions[i].question;
+        optA.textContent = questions[i].optionA;
+        optB.textContent = questions[i].optionB;
+        optC.textContent = questions[i].optionC;
+        optD.textContent = questions[i].optionD;
+        // chosenOpt.addEventListener('click',)
+        //forEach for each of the answer, then add if else statement
+    };
+
+//addevenclick and if else. function to check correct answer
+chosenOpt.addEventListener('click', compareAns);
+};
+
+
+
+
+function compareAns(){
+    if (chosenOpt.value === questions[i].correctAns){
+        answerEl.textContent = 'Correct!';
+        finalScore += 20;
+    }
+
+};
 
 
 //view highscore
 // viewScoreBtnEl.addEventListener('click', //need a funct for view highscore);
 
-// create questions
-let question = '';
+
+ //local storage
+//  var quizTaker = {
+//     quiztaker: 
+//     score:
+//  }
+//  localStorage.setItem('highscores', finalScore);
