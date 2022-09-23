@@ -1,6 +1,50 @@
-var finalScore = "";
-var secondsLeft = 15;
+var finalScore = 0;
+var secondsLeft = 55;
+var counter = 0;
+var questions = [
+    {
+        question: 'JavaScript File Has An Extension of:',
+        optionA: 'A. .java',
+        optionB: 'B. .js',
+        optionC: 'C. javascript',
+        optionD: 'D. .xml',
+        correctAns: 'B'
+    },
+    {
+        question: 'Inside which HTML element do we put the JavaScript?',
+        optionA: 'A. <js>',
+        optionB: 'B. <javascript>',
+        optionC: 'C. <script>',
+        optionD: 'D. <scripting>',
+        correctAns: 'C'
+    },
+    {
+        question: 'Which Of The Dialog Box Display a Message And a Data Entry Field?',
+        optionA: 'A. Alert()',
+        optionB: 'B. Prompt()',
+        optionC: 'C. Confirm()',
+        optionD: 'D. Msg()',
+        correctAns: 'B'
+    },
+    {
+        question: 'How do you write "Hello World" in an alert box?',
+        optionA: 'A. msg("Hello World")',
+        optionB: 'B. msgBox("Hello World")',
+        optionC: 'C. alert("Hello World")',
+        optionD: 'D. alertBox("Hello World")',
+        correctAns: 'C'
+    },
+    {
+        question: 'How do you call a function named "myFunction"?',
+        optionA: 'A. call myFunction()',
+        optionB: 'B. call function myFunction()',
+        optionC: 'C. myFunction',
+        optionD: 'D. myFunction()',
+        correctAns: 'D'
+    },
+];
 
+console.log(questions[counter]);
 var viewScoreBtnEl = document.querySelector('#view-score');
 var timeEl = document.querySelector('#time-el');
 
@@ -10,41 +54,41 @@ var optA = document.querySelector('#a');
 var optB = document.querySelector('#b');
 var optC = document.querySelector('#c');
 var optD = document.querySelector('#d');
-var chosenOpt = document.querySelector('.option');
+var options = document.querySelectorAll('.option');
 var answerEl = document.querySelector('#answer');
 var allDone = document.querySelector('#all-done');
 var quizScore = document.querySelector('#score');
 
-function startQuiz(){
+function startQuiz() {
     startBtnEl.textContent = 'Start Quiz';
     startBtnEl.addEventListener('click', timer);
-    };
+    displayQuestion();
+};
 
-    startQuiz();
+startQuiz();
 
 
 function timer() {
-        var timerInterval = setInterval(function(){
-            secondsLeft--;
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
         startBtnEl.textContent = '';
-        displayQuestion();
-            // if (answerEl === "Incorrect!") {
-            //     secondsLeft = secondsLeft - 15;
-            //     timeLeft();
-            // }
-            if(secondsLeft > 0){
-                timeLeft();
-            } else if(secondsLeft === 0) {
-                clearInterval(timerInterval);
-                sendMessage();
-            }else{
-                timeEl.textContent = '';
-            }
-        }, 1000);
-    };
-
-function timeLeft(){
-    timeEl.textContent = 'Time: ' + secondsLeft +" second(s) left.";
+        // if (answerEl === "Incorrect!") {
+        //     ;
+        //     timeLeft();
+        // }
+        if (secondsLeft > 0) {
+            timeLeft();
+        } else if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            sendMessage();
+        } else {
+            timeEl.textContent = '';
+        }
+    }, 1000);
+};
+//creat function for incorrect answer?
+function timeLeft() {
+    timeEl.textContent = 'Time: ' + secondsLeft + " second(s) left.";
 };
 
 function sendMessage() {
@@ -58,70 +102,44 @@ function sendMessage() {
     //add form to input initials.createElement form
 };
 
-function displayQuestion(){
+
+function displayQuestion() {
     // create questions
-    var questions = [
-        {question: 'JavaScript File Has An Extension of:',
-        optionA: 'A. .java',
-        optionB: 'B. .js',
-        optionC: 'C. javascript',
-        optionD: 'D. .xml',
-        correctAns: 'B. .js'
-        },
-        {question: 'Inside which HTML element do we put the JavaScript?',
-        optionA: 'A. <js>',
-        optionB: 'B. <javascript>',
-        optionC: 'C. <script>',
-        optionD: 'D. <scripting>',
-        correctAns: 'C. <script>'
-        },
-        {question: 'Which Of The Dialog Box Display a Message And a Data Entry Field?',
-        optionA: 'A. Alert()',
-        optionB: 'B. Prompt()',
-        optionC: 'C. Confirm()',
-        optionD: 'D. Msg()',
-        correctAns: 'B. Prompt()'
-        },
-        {question: 'How do you write "Hello World" in an alert box?',
-        optionA: 'A. msg("Hello World")',
-        optionB: 'B. msgBox("Hello World")',
-        optionC: 'C. alert("Hello World")',
-        optionD: 'D. alertBox("Hello World")',
-        correctAns: 'C. alert("Hello World")'
-        },
-        {question: 'How do you call a function named "myFunction"?',
-        optionA: 'A. call myFunction()',
-        optionB: 'B. call function myFunction()',
-        optionC: 'C. myFunction',
-        optionD: 'D. myFunction()',
-        correctAns: 'D. myFunction()'
-        },
-    ];
-    ;
-    for (i = 0 ; i < questions.length ; i++){
-        questionEl.textContent = questions[i].question;
-        optA.textContent = questions[i].optionA;
-        optB.textContent = questions[i].optionB;
-        optC.textContent = questions[i].optionC;
-        optD.textContent = questions[i].optionD;
-        // chosenOpt.addEventListener('click',)
+        questionEl.textContent = questions[counter].question;
+        optA.textContent = questions[counter].optionA;
+        optB.textContent = questions[counter].optionB;
+        optC.textContent = questions[counter].optionC;
+        optD.textContent = questions[counter].optionD;
+
         //forEach for each of the answer, then add if else statement
     };
 
-//addevenclick and if else. function to check correct answer
-chosenOpt.addEventListener('click', compareAns);
-};
 
+function getValue(selectedBtn) {
 
+    var selectedOptVal = selectedBtn
+    var correctAnsVal = questions[counter].correctAns;
 
+    console.log(typeof selectedOptVal)
 
-function compareAns(){
-    if (chosenOpt.value === questions[i].correctAns){
+    if (selectedOptVal === correctAnsVal) {
         answerEl.textContent = 'Correct!';
         finalScore += 20;
+    } else {
+        answerEl.textContent = 'Incorrect!';
+        secondsLeft = secondsLeft - 15;
+        timer();
+        
     }
-
+    counter++;
+    // 
+    displayQuestion();
+    console.log(finalScore);
 };
+
+
+
+
 
 
 //view highscore
@@ -130,7 +148,7 @@ function compareAns(){
 
  //local storage
 //  var quizTaker = {
-//     quiztaker: 
+//     quiztaker:
 //     score:
 //  }
 //  localStorage.setItem('highscores', finalScore);
