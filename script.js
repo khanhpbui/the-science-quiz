@@ -1,5 +1,5 @@
 var finalScore = 0;
-var secondsLeft = 55;
+var secondsLeft = 100;
 var counter = 0;
 var questions = [
     {
@@ -42,19 +42,17 @@ var questions = [
         optionD: 'D. myFunction()',
         correctAns: 'D'
     },
+    {}
 ];
 
-console.log(questions[counter]);
 var viewScoreBtnEl = document.querySelector('#view-score');
 var timeEl = document.querySelector('#time-el');
-
 var startBtnEl = document.querySelector('#start-btn');
 var questionEl = document.querySelector('#question');
 var optA = document.querySelector('#a');
 var optB = document.querySelector('#b');
 var optC = document.querySelector('#c');
 var optD = document.querySelector('#d');
-var options = document.querySelectorAll('.option');
 var answerEl = document.querySelector('#answer');
 var allDone = document.querySelector('#all-done');
 var quizScore = document.querySelector('#score');
@@ -67,15 +65,10 @@ function startQuiz() {
 
 startQuiz();
 
-
 function timer() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         startBtnEl.textContent = '';
-        // if (answerEl === "Incorrect!") {
-        //     ;
-        //     timeLeft();
-        // }
         if (secondsLeft > 0) {
             timeLeft();
         } else if (secondsLeft === 0) {
@@ -86,11 +79,9 @@ function timer() {
         }
     }, 1000);
 };
-//creat function for incorrect answer?
 function timeLeft() {
     timeEl.textContent = 'Time: ' + secondsLeft + " second(s) left.";
 };
-
 function sendMessage() {
     timeEl.textContent = '';
     allDone.textContent = 'ALL DONE!!!';
@@ -101,26 +92,16 @@ function sendMessage() {
     //add textContent with finalScore later. each correct answer is 20%
     //add form to input initials.createElement form
 };
-
-
 function displayQuestion() {
-    // create questions
         questionEl.textContent = questions[counter].question;
         optA.textContent = questions[counter].optionA;
         optB.textContent = questions[counter].optionB;
         optC.textContent = questions[counter].optionC;
         optD.textContent = questions[counter].optionD;
-
-        //forEach for each of the answer, then add if else statement
     };
-
-
 function getValue(selectedBtn) {
-
     var selectedOptVal = selectedBtn
     var correctAnsVal = questions[counter].correctAns;
-
-    console.log(typeof selectedOptVal)
 
     if (selectedOptVal === correctAnsVal) {
         answerEl.textContent = 'Correct!';
@@ -128,16 +109,15 @@ function getValue(selectedBtn) {
     } else {
         answerEl.textContent = 'Incorrect!';
         secondsLeft = secondsLeft - 15;
-        timer();
-        
     }
+    setTimeout(clearComment,3000);
     counter++;
-    // 
-    displayQuestion();
+    setTimeout(displayQuestion,3000);
     console.log(finalScore);
 };
-
-
+function clearComment() {
+    answerEl.textContent = '';
+};
 
 
 
