@@ -1,5 +1,5 @@
 var finalScore = 0;
-var secondsLeft = 5;
+var secondsLeft = 50;
 var counter = 0;
 var viewScoreBtnEl = document.querySelector('#view-score');
 var timeEl = document.querySelector('#time-el');
@@ -11,11 +11,12 @@ var optC = document.querySelector('#c');
 var optD = document.querySelector('#d');
 var answerEl = document.querySelector('#answer');
 var allDone = document.querySelector('#all-done');
-var quizScore = document.querySelector('#score');
+var finalScoreEl = document.querySelector('#score');
 var questContainer = document.querySelector('#question-container');
 var scoreContainer = document.querySelector('#score-container');
 var nameVal = document.querySelector('#name');
-var highScores = [];
+var highScoreList = document.querySelector('#high-score');
+var scoreRecords = [];
 
 var questions = [
     {
@@ -69,7 +70,7 @@ startQuiz();
 
 function timer() {
     var timerInterval = setInterval(function () {
-        startBtnEl.textContent = '';
+        //startBtnEl.setAttribute('style', 'display : none')
         questContainer.setAttribute('style', 'display: block');
         if (secondsLeft > 0) {
             secondsLeft--;
@@ -85,7 +86,7 @@ function sendMessage() {
     allDone.textContent = 'ALL DONE!!!';
     questContainer.setAttribute('style', 'display: none');
     scoreContainer.setAttribute('style', 'display: block');
-    quizScore.textContent = 'Your final score is: ' + finalScore;
+    finalScoreEl.textContent = 'Your final score is: ' + finalScore;
 };
 function displayQuestion() {
     optA.disabled = false;
@@ -132,48 +133,46 @@ function clearComment() {
 
 
 
-console.log(highScores);
+console.log(scoreRecords);
 
 function submitRecord(event) {
     event.preventDefault()
-    var currentScore = nameVal.value + ' : ' + finalScore;
+    var currentScore = [nameVal.value, finalScore];
     if (nameVal.value === '') {
         alert('Please enter your name.')
         return;
     };
-    highScores.push(currentScore);
+    scoreRecords.push(currentScore);
     storeScores();
-    renderHighScore();
+    renderScores();
 };
 
 function storeScores() {
-    localStorage.setItem('score', JSON.stringify(highScores));
+    localStorage.setItem('score', JSON.stringify(scoreRecords));
 };
 
 function init() {
     var storedScores = JSON.parse(localStorage.getItem('score'));
     if (storedScores !== null) {
-        highScores = storedScores;// highscore not made out of init()
-        console.log(highScores)
-        renderHighScore();
+        scoreRecords = storedScores;// highscore not made out of init()
+        console.log(scoreRecords)
+        renderScores();
     };
 };
 
 
 
- console.log('highscore before renderfunction: ' + highScores)// highscore not made out of init()
-
-function renderHighScore() {
-    console.log('highscore inside render func: ' + highScores) //highscore never made it in
+function renderScores() {
+    var sortedScores = scoreRecords.sort((a, b) => b[1] - a[1]);
     scoreContainer.setAttribute('style', 'display : none')
     //startBtnEl.setAttribute('style', 'display : none')
     questContainer.setAttribute('style', 'display : none')
-    console.log(highScores.length)
-    var highScoresLength = highScores.length
-    for (var i = 0; i < highScores.length; i++) {
-        var theScore = highScores[i];
+    for (var i = 0; i < sortedScores.length; i++) {
+        var score = sortedScores[i];
         var li = document.createElement('li');
-        li.textContent = theScore;
+        li.textContent = score[0] + '  ---  ' + score[1];
+        console.log(score)
+        highScoreList.append(li)
     }
 };
 

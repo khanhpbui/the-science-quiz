@@ -7,13 +7,6 @@ header{
     justify-content: space-between;
     margin: 40px ;
 }
-#start-btn{
-    cursor: grab;
-    background-color: rgb(147, 220, 242);
-    border-radius: 5px;
-    width:auto;
-
-}
 
 div#question-container, div#score-container{
     display: none;
