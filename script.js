@@ -1,6 +1,22 @@
 var finalScore = 0;
-var secondsLeft = 100;
+var secondsLeft = 5;
 var counter = 0;
+var viewScoreBtnEl = document.querySelector('#view-score');
+var timeEl = document.querySelector('#time-el');
+var startBtnEl = document.querySelector('#start-btn');
+var questionEl = document.querySelector('#question');
+var optA = document.querySelector('#a');
+var optB = document.querySelector('#b');
+var optC = document.querySelector('#c');
+var optD = document.querySelector('#d');
+var answerEl = document.querySelector('#answer');
+var allDone = document.querySelector('#all-done');
+var quizScore = document.querySelector('#score');
+var questContainer = document.querySelector('#question-container');
+var scoreContainer = document.querySelector('#score-container');
+var nameVal = document.querySelector('#name');
+var highScores = [];
+
 var questions = [
     {
         question: 'JavaScript File Has An Extension of:',
@@ -42,21 +58,7 @@ var questions = [
         optionD: 'D. myFunction()',
         correctAns: 'D'
     },
-    {}
 ];
-
-var viewScoreBtnEl = document.querySelector('#view-score');
-var timeEl = document.querySelector('#time-el');
-var startBtnEl = document.querySelector('#start-btn');
-var questionEl = document.querySelector('#question');
-var optA = document.querySelector('#a');
-var optB = document.querySelector('#b');
-var optC = document.querySelector('#c');
-var optD = document.querySelector('#d');
-var answerEl = document.querySelector('#answer');
-var allDone = document.querySelector('#all-done');
-var quizScore = document.querySelector('#score');
-
 function startQuiz() {
     startBtnEl.textContent = 'Start Quiz';
     startBtnEl.addEventListener('click', timer);
@@ -67,53 +69,56 @@ startQuiz();
 
 function timer() {
     var timerInterval = setInterval(function () {
-        secondsLeft--;
         startBtnEl.textContent = '';
+        questContainer.setAttribute('style', 'display: block');
         if (secondsLeft > 0) {
-            timeLeft();
-        } else if (secondsLeft === 0) {
+            secondsLeft--;
+            timeEl.textContent = 'Time: ' + secondsLeft + " second(s) left.";
+        } else {
             clearInterval(timerInterval);
             sendMessage();
-        } else {
-            timeEl.textContent = '';
         }
     }, 1000);
-};
-function timeLeft() {
-    timeEl.textContent = 'Time: ' + secondsLeft + " second(s) left.";
 };
 function sendMessage() {
     timeEl.textContent = '';
     allDone.textContent = 'ALL DONE!!!';
-    var questContainer = document.querySelector('#question-container');
     questContainer.setAttribute('style', 'display: none');
-    var scoreContainer = document.querySelector('#score-container');
     scoreContainer.setAttribute('style', 'display: block');
-    //add textContent with finalScore later. each correct answer is 20%
-    //add form to input initials.createElement form
+    quizScore.textContent = 'Your final score is: ' + finalScore;
 };
 function displayQuestion() {
-        questionEl.textContent = questions[counter].question;
-        optA.textContent = questions[counter].optionA;
-        optB.textContent = questions[counter].optionB;
-        optC.textContent = questions[counter].optionC;
-        optD.textContent = questions[counter].optionD;
-    };
+    optA.disabled = false;
+    optB.disabled = false;
+    optC.disabled = false;
+    optD.disabled = false;
+    questionEl.textContent = questions[counter].question;
+    optA.textContent = questions[counter].optionA;
+    optB.textContent = questions[counter].optionB;
+    optC.textContent = questions[counter].optionC;
+    optD.textContent = questions[counter].optionD;
+};
 function getValue(selectedBtn) {
-    var selectedOptVal = selectedBtn
+    optA.disabled = true;
+    optB.disabled = true;
+    optC.disabled = true;
+    optD.disabled = true;
+    var selectedOptVal = selectedBtn;
     var correctAnsVal = questions[counter].correctAns;
-
     if (selectedOptVal === correctAnsVal) {
-        answerEl.textContent = 'Correct!';
         finalScore += 20;
+        answerEl.textContent = 'Correct!';
     } else {
         answerEl.textContent = 'Incorrect!';
         secondsLeft = secondsLeft - 15;
-    }
-    setTimeout(clearComment,3000);
-    counter++;
-    setTimeout(displayQuestion,3000);
-    console.log(finalScore);
+    };
+    if (counter < (questions.length - 1)) {
+        setTimeout(clearComment, 2000);
+        counter++;
+        setTimeout(displayQuestion, 2000);
+    } else {
+        secondsLeft = 0;
+    };
 };
 function clearComment() {
     answerEl.textContent = '';
@@ -122,13 +127,99 @@ function clearComment() {
 
 
 
-//view highscore
-// viewScoreBtnEl.addEventListener('click', //need a funct for view highscore);
 
 
- //local storage
-//  var quizTaker = {
-//     quiztaker:
-//     score:
-//  }
-//  localStorage.setItem('highscores', finalScore);
+
+
+
+console.log(highScores);
+
+function submitRecord(event) {
+    event.preventDefault()
+    var currentScore = nameVal.value + ' : ' + finalScore;
+    if (nameVal.value === '') {
+        alert('Please enter your name.')
+        return;
+    };
+    highScores.push(currentScore);
+    storeScores();
+    renderHighScore();
+};
+
+function storeScores() {
+    localStorage.setItem('score', JSON.stringify(highScores));
+};
+
+function init() {
+    var storedScores = JSON.parse(localStorage.getItem('score'));
+    if (storedScores !== null) {
+        highScores = storedScores;// highscore not made out of init()
+        console.log(highScores)
+        renderHighScore();
+    };
+};
+
+
+
+ console.log('highscore before renderfunction: ' + highScores)// highscore not made out of init()
+
+function renderHighScore() {
+    console.log('highscore inside render func: ' + highScores) //highscore never made it in
+    scoreContainer.setAttribute('style', 'display : none')
+    //startBtnEl.setAttribute('style', 'display : none')
+    questContainer.setAttribute('style', 'display : none')
+    console.log(highScores.length)
+    var highScoresLength = highScores.length
+    for (var i = 0; i < highScores.length; i++) {
+        var theScore = highScores[i];
+        var li = document.createElement('li');
+        li.textContent = theScore;
+    }
+};
+
+
+// function init() {
+//     var storedScores = localStorage.getItem('score');
+//     console.log(typeof storedScores)
+//     highScores.push(storedScores);
+// }
+// init();
+
+// function submitRecord(event) {
+//     event.preventDefault()
+//     var currentScore = nameVal.value + ' : ' + finalScore;
+//     if (nameVal.value === ''){
+//         return;
+//     }
+//     console.log(typeof currentScore);
+//     
+//     storeHighScores();
+//     viewHighScore();
+//     console.log(currentScore)
+//     console.log(highScores)
+
+// }
+
+// //view high score
+// function viewHighScore() {
+//     scoreContainer.setAttribute('style' , 'display : none')
+//     startBtnEl.setAttribute('style' , 'display : none')
+//     questContainer.setAttribute('style' , 'display : none')
+//     var storedScores = JSON.parse(localStorage.getItem('score'));
+//     if (storedScores !== null) {
+//         highScores = score;
+//     }
+//     renderScore();
+// };
+
+
+// function renderScore(){
+//     for( var i = 0; i < highScores.length; i++){
+//         var highScores = highScores[i];
+//     var li = document.createElement('li')
+//     li.textContent = highScores;
+
+//     }
+
+// }
+init();

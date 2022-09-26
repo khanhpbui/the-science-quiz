@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript Quiz</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -28,15 +29,20 @@
         <div id="score-container">
             <!-- set to display none in css initially -->
             <h2 id="all-done"></h2>
-            <form>
-                <input id="name" type="text">
-                <button type="submit">Submit</button>
-            </form>
             <div id="score"></div>
+            <form>
+                <label for="name">Enter your name:</label><br>
+                <input id="name" type="text">
+                <button type="submit" onclick="submitRecord(event)">Submit</button>
+            </form>
             <!-- form to input initials -->
+        </div>
+        <div>
+            <ul id="high-score">
+                
+            </ul>
 
         </div>
-        
 
     </main>
     <footer>
