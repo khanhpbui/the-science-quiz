@@ -15,9 +15,9 @@ var finalScoreEl = document.querySelector('#score');
 var questContainer = document.querySelector('#question-container');
 var scoreContainer = document.querySelector('#score-container');
 var nameVal = document.querySelector('#name');
-var highScoreList = document.querySelector('#high-score');
+var highScoreEl = document.querySelector('#high-score');
+var highScoreListEl = document.querySelector('#high-score-list');
 var scoreRecords = [];
-
 var questions = [
     {
         question: 'JavaScript File Has An Extension of:',
@@ -61,7 +61,6 @@ var questions = [
     },
 ];
 function startQuiz() {
-    startBtnEl.textContent = 'Start Quiz';
     startBtnEl.addEventListener('click', timer);
     displayQuestion();
 };
@@ -70,7 +69,7 @@ startQuiz();
 
 function timer() {
     var timerInterval = setInterval(function () {
-        //startBtnEl.setAttribute('style', 'display : none')
+        startBtnEl.setAttribute('style', 'display : none')
         questContainer.setAttribute('style', 'display: block');
         if (secondsLeft > 0) {
             secondsLeft--;
@@ -119,21 +118,12 @@ function getValue(selectedBtn) {
         setTimeout(displayQuestion, 2000);
     } else {
         secondsLeft = 0;
+        renderScores()
     };
 };
 function clearComment() {
     answerEl.textContent = '';
 };
-
-
-
-
-
-
-
-
-
-console.log(scoreRecords);
 
 function submitRecord(event) {
     event.preventDefault()
@@ -144,81 +134,38 @@ function submitRecord(event) {
     };
     scoreRecords.push(currentScore);
     storeScores();
-    renderScores();
+    viewHighScores();
 };
-
 function storeScores() {
     localStorage.setItem('score', JSON.stringify(scoreRecords));
 };
-
 function init() {
     var storedScores = JSON.parse(localStorage.getItem('score'));
     if (storedScores !== null) {
-        scoreRecords = storedScores;// highscore not made out of init()
-        console.log(scoreRecords)
+        scoreRecords = storedScores;
+        console.log(scoreRecords);
         renderScores();
     };
 };
-
-
-
 function renderScores() {
     var sortedScores = scoreRecords.sort((a, b) => b[1] - a[1]);
-    scoreContainer.setAttribute('style', 'display : none')
-    //startBtnEl.setAttribute('style', 'display : none')
-    questContainer.setAttribute('style', 'display : none')
+    scoreContainer.setAttribute('style', 'display : none');
+    questContainer.setAttribute('style', 'display : none');
     for (var i = 0; i < sortedScores.length; i++) {
         var score = sortedScores[i];
         var li = document.createElement('li');
         li.textContent = score[0] + '  ---  ' + score[1];
         console.log(score)
-        highScoreList.append(li)
+        highScoreEl.append(li);
+        
     }
 };
-
-
-// function init() {
-//     var storedScores = localStorage.getItem('score');
-//     console.log(typeof storedScores)
-//     highScores.push(storedScores);
-// }
-// init();
-
-// function submitRecord(event) {
-//     event.preventDefault()
-//     var currentScore = nameVal.value + ' : ' + finalScore;
-//     if (nameVal.value === ''){
-//         return;
-//     }
-//     console.log(typeof currentScore);
-//     
-//     storeHighScores();
-//     viewHighScore();
-//     console.log(currentScore)
-//     console.log(highScores)
-
-// }
-
-// //view high score
-// function viewHighScore() {
-//     scoreContainer.setAttribute('style' , 'display : none')
-//     startBtnEl.setAttribute('style' , 'display : none')
-//     questContainer.setAttribute('style' , 'display : none')
-//     var storedScores = JSON.parse(localStorage.getItem('score'));
-//     if (storedScores !== null) {
-//         highScores = score;
-//     }
-//     renderScore();
-// };
-
-
-// function renderScore(){
-//     for( var i = 0; i < highScores.length; i++){
-//         var highScores = highScores[i];
-//     var li = document.createElement('li')
-//     li.textContent = highScores;
-
-//     }
-
-// }
+function viewHighScores() {
+    highScoreListEl.setAttribute('style', 'display : block');
+    questContainer.setAttribute('style', 'display : none');
+    startBtnEl.setAttribute('style', 'display : none');
+    highScoreEl.setAttribute('style', 'display: block');
+    highScoreEl.innerHTML = '';
+    renderScores();
+}
 init();

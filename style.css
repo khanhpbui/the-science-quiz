@@ -1,13 +1,36 @@
-
 body {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-header{
-    display: flex;
-    justify-content: space-between;
-    margin: 40px ;
+h1 {
+    font-size: 4rem;
+    margin: 3rem;
+    color: rgba(216, 113, 210, 0.918);
+    font-weight: bold;
 }
 
-div#question-container, div#score-container{
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+}
+#time-el {
+    font-size: 1.5rem;
+}
+
+#question-container,
+#high-score-list,
+#score-container {
     display: none;
+}
+
+li {
+    list-style: none;
+}
+button {
+    background-color: rgba(251, 209, 246, 0.694);
+    border-radius: 5px;
+}
+button:hover {
+    background-image: linear-gradient( rgba(241, 74, 221, 0.694) 0%,  rgb(101, 214, 242) 100% );
 }

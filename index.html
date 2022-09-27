@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
-        <button id="view-score">View Highscore</button>
+        <button class="scores" id="view-score" onclick="viewHighScores()">View Highscore</button>
         <div id="time-el">Time:</div>
     </header>
     <h1>Javascript Quiz!!</h1>
     <main>
-        <button id="start-btn"></button>
+        <button id="start-btn">Start Quiz</button>
         <div id="question-container">
             <!-- set to display none -->
             <h2 id="question"></h2>
@@ -37,10 +41,10 @@
             </form>
             <!-- form to input initials -->
         </div>
-        <div>
+        <div id="high-score-list">
             <ul id="high-score">
                 <li></li>
-                
+
             </ul>
 
         </div>
@@ -49,6 +53,7 @@
     <footer>
 
     </footer>
- <script src="script.js"></script>   
+    <script src="script.js"></script>
 </body>
+
 </html>
