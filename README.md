@@ -15,7 +15,7 @@ N/A
 
 ![Alt text](/Screenshot.png "Javascript Quiz")
 
-Link: 
+Link: https://khanhpbui.github.io/javascript-quiz/
 
 Once the page is accessed, the user will be presented with the option to "Start Quiz" or "View Highscores".
 When the quiz starts, the timer will also start, and the user is presented with each question at a time.
