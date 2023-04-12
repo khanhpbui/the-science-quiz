@@ -16,41 +16,35 @@ Behold, the ultimate test of your scientific prowess - the science quiz! Put on 
 
 
 ## Installation
-
+---
 N/A
 
 ## Usage
-
-![Alt text](/Screenshot.png "Javascript Quiz")
+---
 
 Link: https://khanhpbui.github.io/javascript-quiz/
 
-Once the page is accessed, the user will be presented with the option to "Start Quiz" or "View Highscores".
-When the quiz starts, the timer will also start, and the user is presented with each question at a time.
-There will be a comment popping up to let the user know if their answer is correct. Everytime the user answers the question incorrectly, the time is subtracted 15 seconds from the clock.
-When the user finishes taking their quiz, they can save their name and score, and the highscore list will appear in browser.
+As soon as the user lands on the page, they'll be faced with the ultimate decision - to either kick off the quiz and put their knowledge to the test, or check out the leaderboard to see how they measure up against others. <br> Once the quiz is underway, the timer starts ticking and questions are served up one by one for the user to tackle. But wait, there's more! A handy little comment will pop up after each answer to let the user know whether they're a genius or need to hit the books a little harder. <br> Beware though, every time an incorrect answer is given, 15 precious seconds will be shaved off the clock - the pressure is on! Finally, when the user completes the quiz, they can proudly save their name and score to see where they rank on the highscore list, which is proudly displayed in the browser. <br> Good luck!
 
 
-## Credits
+## Screenshot
+---
+<img src="./assets/img/1.png" alt="screeenshot" width="50%">
+<br>
+<img src="./assets/img/2.png" alt="screeenshot" width="50%">
+<br>
+<img src="./assets/img/3.png" alt="screeenshot" width="50%">
+<br>
+<img src="./assets/img/4.png" alt="screeenshot" width="50%">
+<br>
 
-N/A
 
-## License
+## Link
+---
+[Click Here](https://khanhpbui.github.io/my-portfolio/)
 
-N/A
-
-## Badges
-
-N/A
-
-## Features
-
-N/A
-
-## How to Contribute
-
-N/A
-
-## Tests
-
-N/A
+## Contact
+---
+If there are any questions or concerns, please contact me at:<br>
+[GitHub](https://github.com/khanhpbui)<br>
+[Email](mailto:pkkhanhbui@gmail.com)
