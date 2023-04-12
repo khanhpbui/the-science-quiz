@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript Quiz</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <header>
-        <button class="scores" id="view-score" onclick="viewHighScores()">View Highscore</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Science Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div>
+      <header>
+        <button class="scores" id="view-score" onclick="viewHighScores()">
+          View Highscore
+        </button>
         <div id="time-el">Time:</div>
-    </header>
-    <h1>Javascript Quiz!!</h1>
-    <main>
+      </header>
+      <h1>The Ultimate Test of Your Scientific Prowess!!!</h1>
+      <main>
         <button id="start-btn">Start Quiz</button>
         <div id="question-container">
-            <!-- set to display none -->
-            <h2 id="question"></h2>
-            <div id="multi-choices">
-                <button class="option" id="a" onclick="getValue('A')"></button>
-                <button class="option" id="b" onclick="getValue('B')"></button>
-                <button class="option" id="c" onclick="getValue('C')"></button>
-                <button class="option" id="d" onclick="getValue('D')"></button>
-            </div>
-            <div id="answer"></div>
+          <!-- set to display none -->
+          <h2 id="question"></h2>
+          <div id="multi-choices">
+            <button class="option" id="a" onclick="getValue('A')"></button>
+            <button class="option" id="b" onclick="getValue('B')"></button>
+            <button class="option" id="c" onclick="getValue('C')"></button>
+            <button class="option" id="d" onclick="getValue('D')"></button>
+          </div>
+          <div id="answer"></div>
         </div>
         <div id="score-container">
-            <!-- set to display none in css initially -->
-            <h2 id="all-done"></h2>
-            <div id="score"></div>
-            <form>
-                <label for="name">Enter your name:</label><br>
-                <input id="name" type="text">
-                <button type="submit" onclick="submitRecord(event)">Submit</button>
-            </form>
-            <!-- form to input initials -->
+          <!-- set to display none in css initially -->
+          <h2 id="all-done"></h2>
+          <div id="score"></div>
+          <form>
+            <label for="name">Enter your name:</label><br />
+            <input id="name" type="text" />
+            <button type="submit" onclick="submitRecord(event)">Submit</button>
+          </form>
+          <!-- form to input initials -->
         </div>
         <div id="high-score-list">
-            <ul id="high-score">
-                <li></li>
-
-            </ul>
-
+          <ul id="high-score">
+            <li></li>
+          </ul>
         </div>
-
-    </main>
-    <footer>
-
-    </footer>
-    <script src="script.js"></script>
-</body>
-
+      </main>
+    </div>
+    <!-- <div>
+      <img src="./assets/img/bg.png" alt="science" />
+    </div> -->
+    <footer></footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
