@@ -10,35 +10,76 @@ html {
 :root {
   --orange: #ee8561;
   --yellow: #f8d16f;
-  --blue: #775c53;
+  --brown: #6e422bf2;
   --lgblue: #59c0e4;
-  --white: #f0f8ffe6;
+  --white: #f9fbfcfe;
   --blue: #3ea9c6;
   --dkblue: #1660d6;
+  --lgneutral: #f7e9e4;
+  --pink: rgb(251, 101, 126);
 }
 body {
   padding: 0;
   margin: 0;
   color: var(--dkblue);
   text-align: center;
-  font-family: "Times New Roman", Times, serif, Arial, Helvetica, sans-serif;
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-image: url("../img/bg1.png");
-  background-size: 95%;
-  background-position: right -11rem;
+  background-size: 93%;
+  background-position: right -10rem;
+  background-repeat: no-repeat;
 }
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  padding-bottom: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+button {
+  padding: 0.8rem;
+  border-radius: 37px;
+  border: 3px solid rgba(216, 170, 102, 0.858);
+  background-image: linear-gradient(to right, var(--orange), var(--yellow));
+  color: var(--brown);
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+}
+button:hover {
+  font-size: larger;
+}
+#multi-choices button {
+  display: block;
+  margin: 1rem auto;
 
-
+  color: var(--brown);
+  border: 1px solid var(--brown);
+  background-image: var(--lgneutral);
+}
+#answer {
+  color: var(--pink);
+  font-size: 1.5rem;
+}
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 40px;
+  margin: 1rem;
 }
 #time-el {
   font-size: 1.5rem;
   color: var(--orange);
+  font-weight: bold;
 }
 
 #question-container,
@@ -46,9 +87,14 @@ header {
 #score-container {
   display: none;
 }
-
 li {
   list-style: none;
+}
+form input {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif;
 }
 
 /* div img {
